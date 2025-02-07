@@ -6,7 +6,7 @@ const Header = ({ toggleSidebar }) => {
   const location = useLocation();
 
   const pageTitles = {
-    "/": "Dashboard",
+    "/": "Welcome to Admin Dashboard",
     "/users": "Users",
     "/products": "Products",
     "/productupload": "Product Upload",

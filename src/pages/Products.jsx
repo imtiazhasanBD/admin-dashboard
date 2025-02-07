@@ -28,7 +28,6 @@ const Products = () => {
         setIsLoading(false); // Stop loading on error
       });
   }, []);
-  
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +35,9 @@ const Products = () => {
 
   // Handle search and sort
   const filteredProducts = products
-    .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     .sort((a, b) => {
       if (sortCriteria === "name") {
         return a.name.localeCompare(b.name);
@@ -49,7 +50,10 @@ const Products = () => {
   // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const handleNextPage = () => {
@@ -65,7 +69,9 @@ const Products = () => {
       axios
         .delete(`https://api.restful-api.dev/objects/${productToDelete}`)
         .then(() => {
-          setProducts(products.filter((product) => product.id !== productToDelete));
+          setProducts(
+            products.filter((product) => product.id !== productToDelete)
+          );
           setShowDeletePopup(false);
           setProductToDelete(null);
         })
@@ -73,10 +79,8 @@ const Products = () => {
     }
   };
 
-  if(isLoading){
-    return(
-      <Loading/>
-    )
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -93,25 +97,24 @@ const Products = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <div className="flex sm:gap-4 sm:justify-end justify-between">
-
-          <select
-            className="px-3 py-2 border rounded-md text-gray-600 bg-white"
-            value={sortCriteria}
-            onChange={(e) => setSortCriteria(e.target.value)}
+            <select
+              className="px-3 py-2 border rounded-md text-gray-600 bg-white"
+              value={sortCriteria}
+              onChange={(e) => setSortCriteria(e.target.value)}
             >
-            <option value="name">Sort by Name</option>
-            <option value="price">Sort by Price</option>
-          </select>
-          <Link
-            to="/productupload"
-            className="py- px-3 bg-violet-600 text-white text-sm flex items-center gap-2 rounded-md hover:bg-violet-700"
-          >
-            <button className="flex items-center gap-2">
-              <FiPlus size={"1rem"} />
-              Add Product
-            </button>
-          </Link>
-            </div>
+              <option value="name">Sort by Name</option>
+              <option value="price">Sort by Price</option>
+            </select>
+            <Link
+              to="/productupload"
+              className="py- px-3 bg-violet-600 text-white text-sm flex items-center gap-2 rounded-md hover:bg-violet-700"
+            >
+              <button className="flex items-center gap-2 font-semibold">
+                <FiPlus size={"1rem"} />
+                Add Product
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -135,8 +138,8 @@ const Products = () => {
                   <td className="px-4 py-2 border border-gray-300">
                     {product?.data?.price || "Not available"}
                   </td>
-                  <td className="px-4 py-2 border border-gray-300 flex gap-6">
-                  <div className="flex gap-6">
+                  <td className="px-4 py-2 border border-gray-300">
+                    <div className="flex gap-6">
                       <Eye
                         size={18}
                         className="text-violet-700 hover:underline cursor-pointer"
@@ -189,21 +192,34 @@ const Products = () => {
 
       {/* Modal Popup for Product Details */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 shadow-lg relative">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-2xl w-96 shadow-xl relative transform scale-100 transition-all duration-300 ease-in-out">
             <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 transition duration-300"
               onClick={() => setSelectedProduct(null)}
             >
-              <FiX size={"1.5rem"} />
+              <FiX size={24} className="text-indigo-700 hover:text-red-500" />
             </button>
-            <h2 className="text-xl font-semibold mb-4">Product Details</h2>
-            <p className="mb-2">
-              <strong>Name:</strong> {selectedProduct.name}
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900 border-b pb-2">
+              Product Details
+            </h2>
+            <p className="mb-3 text-gray-700">
+              <strong className="text-gray-900">Name:</strong>{" "}
+              {selectedProduct.name}
             </p>
-            <p className="mb-2">
-              <strong>Price:</strong> {selectedProduct?.data?.price || "Not available"}
-            </p>
+            <div className="space-y-2">
+              {Object.entries(selectedProduct.data)?.map(
+                ([key, value], index) => (
+                  <p
+                    className="mb-2 text-gray-700 flex justify-between border-b pb-1"
+                    key={index}
+                  >
+                    <strong className="text-gray-900">{key}:</strong>{" "}
+                    <span>{value}</span>
+                  </p>
+                )
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -212,9 +228,12 @@ const Products = () => {
       {showDeletePopup && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-            <h2 className="text-lg font-semibold mb-4">Are you absolutely sure?</h2>
+            <h2 className="text-lg font-semibold mb-4">
+              Are you absolutely sure?
+            </h2>
             <p className="text-sm text-gray-600 mb-6">
-              This action cannot be undone. This will permanently delete the product.
+              This action cannot be undone. This will permanently delete the
+              product.
             </p>
             <div className="flex justify-end gap-4">
               <button
