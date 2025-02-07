@@ -19,10 +19,10 @@ email = "admin@example.com" & password = "admin123"
 
 # 🔗 API Endpoints
 Users API
-🔹 Fetch Users: GET https://jsonplaceholder.typicode.com/users
+- 🔹 Fetch Users: GET https://jsonplaceholder.typicode.com/users
 
 # Products API
-🔹 Fetch Products: GET https://api.restful-api.dev/objects
-🔹 Add Product: POST https://api.restful-api.dev/objects
-🔹 Get Product by ID: GET https://api.restful-api.dev/objects/:id
-🔹 Delete Product: DELETE https://api.restful-api.dev/objects/:id
+- 🔹 Fetch Products: GET https://api.restful-api.dev/objects
+- 🔹 Add Product: POST https://api.restful-api.dev/objects
+- 🔹 Get Product by ID: GET https://api.restful-api.dev/objects/:id
+- 🔹 Delete Product: DELETE https://api.restful-api.dev/objects/:id
