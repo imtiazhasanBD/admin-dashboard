@@ -205,10 +205,10 @@ const Products = () => {
             </h2>
             <p className="mb-3 text-gray-700">
               <strong className="text-gray-900">Name:</strong>{" "}
-              {selectedProduct.name}
+              {selectedProduct?.name}
             </p>
             <div className="space-y-2">
-              {Object.entries(selectedProduct.data)?.map(
+              {Object.entries(selectedProduct?.data)?.map(
                 ([key, value], index) => (
                   <p
                     className="mb-2 text-gray-700 flex justify-between border-b pb-1"
