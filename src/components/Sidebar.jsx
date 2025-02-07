@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { LuUsers } from "react-icons/lu";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -9,6 +9,13 @@ import { LogOut } from "lucide-react";
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const location = useLocation();
   console.log(location.pathname);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuthenticated"); // Remove auth state
+    navigate("/login"); // Redirect to login page
+  };
 
   return (
     <>
@@ -77,7 +84,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </Link>
             </li>
           </ul>
-          <button className="flex gap-2 items-center font-semibold hover:text-indigo-700 text-sm">
+          <button onClick={handleLogout} className="flex gap-2 items-center font-semibold hover:text-indigo-700 text-sm">
             <LogOut size={18}/>
             Logout
           </button>
