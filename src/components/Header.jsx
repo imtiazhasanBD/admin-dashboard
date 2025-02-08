@@ -9,12 +9,14 @@ const Header = ({ toggleSidebar }) => {
     "/": "Dashboard",
     "/users": "Users",
     "/products": "Products",
+    "/productupload": "Product Upload",
   };
 
   const currentTitle = pageTitles[location.pathname];
 
   return (
-    <div className="w-full md:py-6 p-4 md:px-10 bg-white border-b flex justify-between items-center text-gray-600 shadow-sm">
+  <div className="fixed inset-0 lg:left-64 h-24">
+          <div className="w-full md:py-6 p-4 md:px-10 bg-white border-b flex justify-between items-center text-gray-600 shadow-sm">
         {/* Title Section */}
       <div className="flex gap-2 items-center">
         {/* Toggle Button for Mobile */}
@@ -37,6 +39,7 @@ const Header = ({ toggleSidebar }) => {
         </button>
       </div>
     </div>
+  </div>
   );
 };
 

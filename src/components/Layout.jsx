@@ -14,7 +14,7 @@ console.log(isOpen);
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar}/>
       <div className="flex flex-col w-full lg:ml-64">
         <Header toggleSidebar={toggleSidebar}/>
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-2 md:p-6 mt-20">{children}</main>
       </div>
     </div>
   );

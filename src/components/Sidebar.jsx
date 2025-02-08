@@ -16,13 +16,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="w-full h-screen inset-0 z-[1000] bg-black opacity-70 fixed lg:hidden"
+          className="w-full h-screen inset-0 z-30 bg-black opacity-70 fixed lg:hidden"
         ></div>
       )}
 
       {/* Sidebar */}
       <div
-        className={`bg-white text-gray-800 p-4 shadow-md w-64 h-full fixed top-0 transform transition-transform duration-500 ease-in-out z-[1006] 
+        className={`bg-white text-gray-800 p-4 shadow-md w-64 h-full fixed top-0 transform transition-transform duration-500 ease-in-out z-40 
         ${isOpen ? "translate-x-0 left-0" : "-translate-x-full left-0"} 
         lg:translate-x-0`}
       >
